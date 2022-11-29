@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { MovieByID } from 'services/MovieByID';
 import { useEffect, useState } from 'react';
 
