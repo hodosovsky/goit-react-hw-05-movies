@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { FetchMovieReview } from 'services/ApiService';
-import defaultImage from '../../images/default-avatar.png';
 
 const ReviewPage = () => {
   const [review, setReview] = useState([]);
