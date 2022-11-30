@@ -1,35 +1,37 @@
-import { useParams } from 'react-router-dom';
-import { MovieByID } from 'services/MovieByID';
+import { useParams, Link, Outlet } from 'react-router-dom';
+import { FetchMovieByID } from 'services/ApiService';
 import { useEffect, useState } from 'react';
 import { DescriptionWrap } from './MovieDetails.styled';
 
 export const MovieByIDPage = () => {
   const [movie, setMovie] = useState([]);
+  const [posterUrl, setPosterUrl] = useState('');
   const { moveiId } = useParams();
-  console.log(moveiId);
 
-  const posterURL = 'https://image.tmdb.org/t/p/w500/';
-  useEffect(() => {
-    MovieByID(moveiId)
-      .then(film => {
-        const filmDetails = film.data;
-        console.log(filmDetails);
-        setMovie(filmDetails);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [moveiId]);
+  useEffect(
+    (prevProps, prevState) => {
+      FetchMovieByID(moveiId)
+        .then(film => {
+          const filmDetails = film.data;
+
+          setMovie(filmDetails);
+
+          let imageURL = 'https://image.tmdb.org/t/p/w500';
+          imageURL = imageURL + filmDetails.poster_path;
+          setPosterUrl(imageURL);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    [moveiId, posterUrl]
+  );
 
   return (
     <section>
       <DescriptionWrap className="desription">
         <div className="poster">
-          <img
-            src={posterURL + movie.poster_path}
-            alt={movie.original_title}
-            width="300"
-          />
+          <img src={posterUrl} alt={movie.original_title} width="300" />
         </div>
         <div>
           <h2>{movie.original_title}</h2>
@@ -47,17 +49,11 @@ export const MovieByIDPage = () => {
           {movie.genres && <p>{movie.genres.map(genr => genr.name + ' ')}</p>}
         </div>
       </DescriptionWrap>
-      {/* <li key={film.id}>
-        <Link className="film-link" to={`/movies/${film.id}`}>
-          <img
-            src={posterURL + film.poster_path}
-            alt={film.title ?? film.name}
-            width="100"
-          ></img>
-          <br />
-          {film.title ?? film.name}
-        </Link>
-      </li> */}
+      <Link to={`/movies/${moveiId}/cast`}>Cast</Link>
+      <br />
+      <br />
+      <Link to={`/movies/${moveiId}/reviews`}>Reviews</Link>
+      <Outlet />
     </section>
   );
 };

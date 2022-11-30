@@ -1,14 +1,12 @@
-import { Link } from 'react-router-dom';
-import { TopMovies } from 'services/TopMovies.service';
+import { FetchTopMovies } from 'services/ApiService';
 import { useEffect, useState } from 'react';
-import { FilmList } from './HomePage.styled';
+import { FilmList } from 'components/Film.List/FilmList';
 
 export const HomePage = () => {
   const [films, setFilms] = useState([]);
-  const posterURL = 'https://image.tmdb.org/t/p/w500/';
 
   useEffect(() => {
-    TopMovies().then(films => {
+    FetchTopMovies().then(films => {
       const filmCollection = films.data.results;
       setFilms(filmCollection);
     });
@@ -16,21 +14,8 @@ export const HomePage = () => {
 
   return (
     <>
-      <FilmList>
-        {films.map(film => (
-          <li key={film.id}>
-            <Link className="film-link" to={`/movies/${film.id}`}>
-              <img
-                src={posterURL + film.poster_path}
-                alt={film.title ?? film.name}
-                width="100"
-              ></img>
-              <br />
-              {film.title ?? film.name}
-            </Link>
-          </li>
-        ))}
-      </FilmList>
+      <h1>Trending Today</h1>
+      <FilmList films={films} />
     </>
   );
 };
