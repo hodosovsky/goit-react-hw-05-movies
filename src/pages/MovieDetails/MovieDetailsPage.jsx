@@ -2,6 +2,7 @@ import { useParams, Link, Outlet } from 'react-router-dom';
 import { FetchMovieByID } from 'services/ApiService';
 import { useEffect, useState } from 'react';
 import { DescriptionWrap } from './MovieDetails.styled';
+import defaultposter from '../../images/default-poster.png';
 
 export const MovieByIDPage = () => {
   const [movie, setMovie] = useState([]);
@@ -29,9 +30,16 @@ export const MovieByIDPage = () => {
 
   return (
     <section>
+      <Link to="/"> back</Link>
+
       <DescriptionWrap className="desription">
         <div className="poster">
-          <img src={posterUrl} alt={movie.original_title} width="300" />
+          <br />
+          <img
+            src={movie.poster_path ? posterUrl : defaultposter}
+            alt={movie.original_title}
+            width="200"
+          />
         </div>
         <div>
           <h2>{movie.original_title}</h2>
