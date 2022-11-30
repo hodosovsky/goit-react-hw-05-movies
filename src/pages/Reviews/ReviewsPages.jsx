@@ -12,7 +12,7 @@ const ReviewPage = () => {
       FetchMovieReview(moveiId)
         .then(cast => {
           const filmReview = cast.data.results;
-          console.log(filmReview);
+
           setReview(filmReview);
         })
         .catch(error => {
@@ -23,15 +23,15 @@ const ReviewPage = () => {
   );
   return (
     <ul>
-      {review.length === 0 && (
-        <h4>We do not have any reviews for this movie</h4>
-      )}
       {review.map(item => (
         <li key={item.id}>
           <h6>{item.author}</h6>
           <p>{item.content && item.content}</p>
         </li>
       ))}
+      {review.length === 0 && (
+        <h4>We do not have any reviews for this movie</h4>
+      )}
     </ul>
   );
 };
