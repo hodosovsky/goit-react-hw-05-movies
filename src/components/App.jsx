@@ -8,11 +8,13 @@ import { Layout } from './Layout';
 // import { MovieByIDPage } from 'pages/MovieDetails/MovieDetailsPage';
 // import { CastPage } from 'pages/Cast/CastPage';
 // import { ReviewPage } from 'pages/Reviews/ReviewsPages';
-const HomePage = lazy(() => import('pages/HomePage/HomePage'));
-const MoviesPage = lazy(() => import('pages/MoviesPage/MoviesPage'));
-const MovieByIDPage = lazy(() => import('pages/MovieDetails/MovieDetailsPage'));
-const CastPage = lazy(() => import('pages/Cast/CastPage'));
-const ReviewPage = lazy(() => import('pages/Reviews/ReviewsPages'));
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('../pages/MoviesPage/MoviesPage'));
+const MovieByIDPage = lazy(() =>
+  import('../pages/MovieDetails/MovieDetailsPage')
+);
+const CastPage = lazy(() => import('../pages/Cast/CastPage'));
+const ReviewPage = lazy(() => import('../pages/Reviews/ReviewsPages'));
 
 export const App = () => {
   return (
