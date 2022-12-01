@@ -8,7 +8,7 @@ import { Layout } from './Layout';
 // import { MovieByIDPage } from 'pages/MovieDetails/MovieDetailsPage';
 // import { CastPage } from 'pages/Cast/CastPage';
 // import { ReviewPage } from 'pages/Reviews/ReviewsPages';
-const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const HomePage = lazy(() => import('../pages/homePage/HomePage'));
 const MoviesPage = lazy(() => import('../pages/MoviesPage/MoviesPage'));
 const MovieByIDPage = lazy(() =>
   import('../pages/MovieDetails/MovieDetailsPage')
