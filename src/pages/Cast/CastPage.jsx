@@ -25,7 +25,7 @@ const CastPage = () => {
   return (
     <ul>
       {cast.map(item => (
-        <li key={item.name}>
+        <li key={item.id}>
           <img
             src={
               item.profile_path
