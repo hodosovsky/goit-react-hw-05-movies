@@ -14,6 +14,7 @@ export const SearchForm = ({ onSubmit }) => {
     }
     onSubmit(title);
     reset();
+    e.target.reset();
   };
 
   const handleChange = e => {
