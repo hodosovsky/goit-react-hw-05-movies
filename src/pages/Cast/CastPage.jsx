@@ -9,7 +9,7 @@ const CastPage = () => {
   const { moveiId } = useParams();
   useEffect(
     (prevProps, prevState) => {
-      FetchMovieCast(moveiId)
+      FetchMovieCast(Number(moveiId))
         .then(cast => {
           const filmcast = cast.data.cast;
 
@@ -43,4 +43,4 @@ const CastPage = () => {
   );
 };
 
-export { CastPage };
+export default CastPage;

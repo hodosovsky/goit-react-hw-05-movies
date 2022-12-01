@@ -1,20 +1,20 @@
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { FetchMovieByID } from 'services/ApiService';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { DescriptionWrap } from './MovieDetails.styled';
 import defaultposter from '../../images/default-poster.png';
 
-export const MovieByIDPage = () => {
+const MovieByIDPage = () => {
+  const location = useLocation();
   const [movie, setMovie] = useState([]);
   const [posterUrl, setPosterUrl] = useState('');
   const { moveiId } = useParams();
 
   useEffect(
     (prevProps, prevState) => {
-      FetchMovieByID(moveiId)
+      FetchMovieByID(Number(moveiId))
         .then(film => {
           const filmDetails = film.data;
-
           setMovie(filmDetails);
 
           let imageURL = 'https://image.tmdb.org/t/p/w500';
@@ -22,46 +22,63 @@ export const MovieByIDPage = () => {
           setPosterUrl(imageURL);
         })
         .catch(error => {
-          console.log(error);
+          return;
         });
     },
-    [moveiId, posterUrl]
+    [moveiId]
   );
+  if (!movie) {
+    return null;
+  }
 
+  const backLinkHref = location.state?.from ?? '/';
   return (
     <section>
-      <Link to="/"> back</Link>
-
+      <Link to={backLinkHref}> back</Link>
+      {/* {movie !== [] && ( */}
       <DescriptionWrap className="desription">
         <div className="poster">
           <br />
           <img
-            src={movie.poster_path ? posterUrl : defaultposter}
-            alt={movie.original_title}
+            src={movie?.poster_path ? posterUrl : defaultposter}
+            alt={movie?.poster_path ? posterUrl : defaultposter}
             width="200"
           />
         </div>
         <div>
-          <h2>{movie.original_title}</h2>
-          {movie.vote_average > 0 && (
-            <p>User Score: {Math.round(movie.vote_average * 10)}%</p>
+          <h2>{movie?.original_title}</h2>
+          {movie?.vote_average > 0 && (
+            <p>User Score: {Math.round(movie?.vote_average * 10)}%</p>
           )}
 
           <br />
-          <a href={movie.homepage} target="blanc">
-            Homepage
-          </a>
-          <h3>Overview</h3>
-          <p>{movie.overview}</p>
-          {movie.genres && <h4>Genres</h4>}
-          {movie.genres && <p>{movie.genres.map(genr => genr.name + ' ')}</p>}
+          {movie?.overview && (
+            <a href={movie?.homepage} target="blanc">
+              Homepage
+            </a>
+          )}
+          {movie?.overview && <h3>Overview</h3>}
+          <p>{movie?.overview && movie.overview}</p>
+
+          {movie?.genres && <h4>Genres</h4>}
+          {movie?.genres && <p>{movie.genres.map(genr => genr.name + ' ')}</p>}
         </div>
       </DescriptionWrap>
-      <Link to={`/movies/${moveiId}/cast`}>Cast</Link>
+      {/* )} */}
+      <h3>Aditional information</h3>
+      <Link to={`/movies/${moveiId}/cast`} state={{ from: backLinkHref }}>
+        Cast
+      </Link>
       <br />
       <br />
-      <Link to={`/movies/${moveiId}/reviews`}>Reviews</Link>
-      <Outlet />
+      <Link to={`/movies/${moveiId}/reviews`} state={{ from: backLinkHref }}>
+        Reviews
+      </Link>
+      <Suspense fallback={<p>loading...</p>}>
+        <Outlet />
+      </Suspense>
     </section>
   );
 };
+
+export default MovieByIDPage;

@@ -1,0 +1,36 @@
+import { useState } from 'react';
+
+export const SearchForm = ({ onSubmit }) => {
+  const [title, setTitle] = useState('');
+
+  const reset = () => {
+    setTitle('');
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (title === '') {
+      return;
+    }
+    onSubmit(title);
+    reset();
+  };
+
+  const handleChange = e => {
+    setTitle(e.target.value.toLowerCase());
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        <input
+          type="text"
+          name="input"
+          placeholder="Enter film's title"
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">search</button>
+    </form>
+  );
+};

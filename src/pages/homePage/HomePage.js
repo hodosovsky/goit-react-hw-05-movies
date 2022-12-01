@@ -2,7 +2,7 @@ import { FetchTopMovies } from 'services/ApiService';
 import { useEffect, useState } from 'react';
 import { FilmList } from 'components/Film.List/FilmList';
 
-export const HomePage = () => {
+const HomePage = () => {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
@@ -19,3 +19,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;

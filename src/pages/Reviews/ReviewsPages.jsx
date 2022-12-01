@@ -8,7 +8,7 @@ const ReviewPage = () => {
   const { moveiId } = useParams();
   useEffect(
     (prevProps, prevState) => {
-      FetchMovieReview(moveiId)
+      FetchMovieReview(Number(moveiId))
         .then(cast => {
           const filmReview = cast.data.results;
 
@@ -35,4 +35,4 @@ const ReviewPage = () => {
   );
 };
 
-export { ReviewPage };
+export default ReviewPage;
