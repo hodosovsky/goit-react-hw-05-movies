@@ -24,6 +24,8 @@ const FilmListStyled = styled.ul`
     }
 
     & a {
+      display: block;
+      height: 100%;
       text-decoration: none;
       color: grey;
     }
