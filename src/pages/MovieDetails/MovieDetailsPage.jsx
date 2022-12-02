@@ -33,7 +33,7 @@ const MovieByIDPage = () => {
 
   const backLinkHref = location.state?.from ?? '/';
   return (
-    <section>
+    <div>
       <Link to={backLinkHref}> back</Link>
       {/* {movie !== [] && ( */}
       {movie !== [] && (
@@ -84,7 +84,7 @@ const MovieByIDPage = () => {
       <Suspense fallback={<p>loading...</p>}>
         <Outlet />
       </Suspense>
-    </section>
+    </div>
   );
 };
 
