@@ -36,35 +36,42 @@ const MovieByIDPage = () => {
     <section>
       <Link to={backLinkHref}> back</Link>
       {/* {movie !== [] && ( */}
-      <DescriptionWrap className="desription">
-        <div className="poster">
-          <br />
-          <img
-            src={movie?.poster_path ? posterUrl : defaultposter}
-            alt={movie?.poster_path ? posterUrl : defaultposter}
-            width="200"
-          />
-        </div>
-        <div>
-          <h2>{movie?.original_title}</h2>
-          {movie?.vote_average > 0 && (
-            <p>User Score: {Math.round(movie?.vote_average * 10)}%</p>
-          )}
+      {movie !== [] && (
+        <DescriptionWrap className="desription">
+          <div className="poster">
+            <br />
+            <img
+              src={movie?.poster_path ? posterUrl : defaultposter}
+              alt={movie?.poster_path ? movie.title : 'defaultposter'}
+              width="200"
+            />
+          </div>
+          <div>
+            <h2>
+              {movie?.original_title
+                ? movie?.original_title
+                : 'sorry... We have no information about this film'}
+            </h2>
+            {movie?.vote_average > 0 && (
+              <p>User Score: {Math.round(movie?.vote_average * 10)}%</p>
+            )}
 
-          <br />
-          {movie?.overview && (
-            <a href={movie?.homepage} target="blanc">
-              Homepage
-            </a>
-          )}
-          {movie?.overview && <h3>Overview</h3>}
-          <p>{movie?.overview && movie.overview}</p>
+            <br />
+            {movie?.overview && (
+              <a href={movie?.homepage} target="blanc">
+                Homepage
+              </a>
+            )}
+            {movie?.overview && <h3>Overview</h3>}
+            <p>{movie?.overview && movie.overview}</p>
 
-          {movie?.genres && <h4>Genres</h4>}
-          {movie?.genres && <p>{movie.genres.map(genr => genr.name + ' ')}</p>}
-        </div>
-      </DescriptionWrap>
-      {/* )} */}
+            {movie?.genres && <h4>Genres</h4>}
+            {movie?.genres && (
+              <p>{movie.genres.map(genr => genr.name + ' ')}</p>
+            )}
+          </div>
+        </DescriptionWrap>
+      )}
       <h3>Aditional information</h3>
       <Link to={`/movies/${moveiId}/cast`} state={{ from: backLinkHref }}>
         Cast

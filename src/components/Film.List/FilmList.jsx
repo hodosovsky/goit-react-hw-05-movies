@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { FilmListStyled } from './FilmList.styled';
+import defaultposter from '../../images/default-poster.png';
 
 export const FilmList = ({ films }) => {
   const location = useLocation();
@@ -13,13 +14,15 @@ export const FilmList = ({ films }) => {
               to={`/movies/${film.id}`}
               state={{ from: location }}
             >
-              {film.poster_path && (
-                <img
-                  src={'https://image.tmdb.org/t/p/w500' + film.poster_path}
-                  alt={film.title ?? film.name}
-                  width="100"
-                ></img>
-              )}
+              <img
+                src={
+                  film?.poster_path
+                    ? 'https://image.tmdb.org/t/p/w500' + film.poster_path
+                    : defaultposter
+                }
+                alt={film.title ?? film.name}
+                width="100"
+              ></img>
               <br />
               {film.title ?? film.name}
             </Link>

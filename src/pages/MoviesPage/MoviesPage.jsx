@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { FetchByMovieName } from 'services/ApiService';
 import { SearchForm } from 'components/SearchForm/SearchForm';
-import { FilmSearchedList } from './MoviesPage.styled';
-import defaultposter from '../../images/default-poster.png';
+// import { FilmSearchedList } from './MoviesPage.styled';
+import { FilmList } from 'components/Film.List/FilmList';
 
 const MoviesPage = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [searchedFilms, setSearchedFilms] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,15 +25,13 @@ const MoviesPage = () => {
     setSearchParams(value !== '' ? { query: value } : {});
   };
 
-  if (!searchedFilms) {
-    return null;
-  }
-
   return (
     <main>
       <SearchForm onSubmit={handleSearhFilm} />
+      {searchedFilms.length === 0 && query !== '' && <h1>Not found</h1>}
       {searchedFilms.length > 0 && (
-        <FilmSearchedList>
+        <FilmList films={searchedFilms} />
+        /* <FilmSearchedList>
           {searchedFilms.map(item => (
             <li key={item.id}>
               <Link to={`${Number(item.id)}`} state={{ from: location }}>
@@ -52,7 +50,7 @@ const MoviesPage = () => {
               </Link>
             </li>
           ))}
-        </FilmSearchedList>
+        </FilmSearchedList> */
       )}
     </main>
   );
