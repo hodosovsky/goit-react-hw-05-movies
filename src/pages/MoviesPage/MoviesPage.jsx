@@ -26,7 +26,7 @@ const MoviesPage = () => {
   };
 
   return (
-    <main>
+    <div>
       <SearchForm onSubmit={handleSearhFilm} />
       {searchedFilms.length === 0 && query !== '' && <h1>Not found</h1>}
       {searchedFilms.length > 0 && (
@@ -52,7 +52,7 @@ const MoviesPage = () => {
           ))}
         </FilmSearchedList> */
       )}
-    </main>
+    </div>
   );
 };
 
