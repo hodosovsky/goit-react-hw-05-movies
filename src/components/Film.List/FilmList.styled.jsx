@@ -7,7 +7,26 @@ const FilmListStyled = styled.ul`
   gap: 20px;
 
   & li {
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 150px;
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: scale 250ms linear;
+
+    &:hover {
+      scale: 1.1;
+    }
+
+    &:hover a {
+      color: blue;
+    }
+
+    & a {
+      text-decoration: none;
+      color: grey;
+    }
   }
 `;
 
