@@ -47,11 +47,7 @@ const MovieByIDPage = () => {
             />
           </div>
           <div>
-            <h2>
-              {movie?.original_title
-                ? movie?.original_title
-                : 'sorry... We have no information about this film'}
-            </h2>
+            <h2>{movie?.original_title}</h2>
             {movie?.vote_average > 0 && (
               <p>User Score: {Math.round(movie?.vote_average * 10)}%</p>
             )}

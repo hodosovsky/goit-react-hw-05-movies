@@ -2,7 +2,7 @@ import axios from 'axios';
 const API_KEY = 'dc1eafce510836ca61a79dd47f826d41';
 export const FetchTopMovies = async () => {
   const data = await axios.get(
-    `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
+    `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
   );
 
   return data;

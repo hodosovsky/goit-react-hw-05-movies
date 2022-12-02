@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { FilmListStyled } from './FilmList.styled';
 import defaultposter from '../../images/default-poster.png';
 
@@ -31,4 +32,8 @@ export const FilmList = ({ films }) => {
       </FilmListStyled>
     </>
   );
+};
+
+FilmList.propTypes = {
+  films: PropTypes.array.isRequired,
 };
