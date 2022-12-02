@@ -5,7 +5,7 @@ import { HeaderList } from './Layout.styled';
 
 export const Layout = () => {
   return (
-    <header>
+    <>
       <HeaderList className="header-list">
         <li>
           <NavLink to="" className="header-item">
@@ -21,6 +21,6 @@ export const Layout = () => {
       <Suspense fallback={<p>loading...</p>}>
         <Outlet />
       </Suspense>
-    </header>
+    </>
   );
 };
